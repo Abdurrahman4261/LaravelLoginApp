@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    public function proile(){
+    public function profile(){
         return view('adminprofile',compact('users'));
     }
     public function index()
