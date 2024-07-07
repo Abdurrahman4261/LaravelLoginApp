@@ -96,7 +96,6 @@
                                 @csrf
                                 @method('DELETE')
                                 @if($user->user_type == 0)
-                                    <button type="button" class="btn btn-danger btn-sm" disabled>Sil</button>
                                     <span class="text-danger">Admin olan kullanıcıları silemezsiniz.</span>
                                 @else
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu kullanıcıyı silmek istediğinizden emin misiniz?')">Sil</button>
