@@ -12,25 +12,33 @@ use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admindashboard');
 })->name('home');
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+
 Route::middleware(['guest', PreventBackHistory::class])->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login']);
+
 });
 
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin panele erişim sağlayacak route'lar burada tanımlanır
+    Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+});
+
 Route::middleware([AdminMiddleware::class, PreventBackHistory::class])->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    //Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users', [AdminController::class, 'userlist'])->name('users.index');
     Route::get('/admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
+    Route::get('/admin/users/{user}/view', [AdminController::class, 'view'])->name('admin.users.view');
     Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
     Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
     Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
 });
-
 
 Route::middleware(['auth', PreventBackHistory::class])->group(function () {
     Route::get('/adminprofile', [AdminController::class, 'index'])->name('adminprofile');

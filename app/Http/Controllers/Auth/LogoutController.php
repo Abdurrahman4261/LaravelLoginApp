@@ -14,7 +14,7 @@ class LogoutController extends Controller
         $request->session()->invalidate(); 
         $request->session()->regenerateToken(); 
         $request->session()->flush();
-        return redirect()->route('home')->with('success', 'Basariyla cikis yapildi.')->withHeaders([
+        return redirect()->route('login')->with('success', 'Basariyla cikis yapildi.')->withHeaders([
             'Cache-Control' => 'no-cache, no-store, must-revalidate',
             'Pragma' => 'no-cache',
             'Expires' => '0',
