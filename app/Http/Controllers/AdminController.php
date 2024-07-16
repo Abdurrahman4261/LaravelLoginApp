@@ -16,7 +16,7 @@ class AdminController extends Controller
     }
     public function index()
     {
-        $users = User::all(); // Tüm kullanıcıları getir
+        $users = User::all(); 
 
         return view('admindashboard', compact('users'));
     }

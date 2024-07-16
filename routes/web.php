@@ -12,8 +12,12 @@ use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('admindashboard');
+    return view('welcome');
 })->name('home');
+
+Route::get('/adminhome', function () {
+    return view('admindashboard');
+})->name('adminhome');
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
@@ -25,9 +29,8 @@ Route::middleware(['guest', PreventBackHistory::class])->group(function () {
 });
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    // Admin panele erişim sağlayacak route'lar burada tanımlanır
-    Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::get('/admindashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 Route::middleware([AdminMiddleware::class, PreventBackHistory::class])->group(function () {

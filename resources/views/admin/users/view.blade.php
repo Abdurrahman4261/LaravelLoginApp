@@ -23,7 +23,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">Anasayfa</a>
+        <a href="{{route('admin.dashboard')}}" class="nav-link">Anasayfa</a>
       </li>
         <li class="nav-item d-none d-sm-inline-block">
             @if (Route::has('login'))
@@ -470,7 +470,7 @@
               <li class="nav-item">
                 <a href="{{ route('users.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Projects</p>
+                  <p>Bilgiler</p>
                 </a>
               </li>
             </ul>
