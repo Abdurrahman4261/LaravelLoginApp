@@ -1,113 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoş Geldiniz</title>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <style>
-        body {
-            background: url('https://laravel.com/assets/img/welcome/background.svg') no-repeat center center fixed;
-            background-size: cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Arial', sans-serif;
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            max-width: 500px;
-            width: 100%;
-        }
-        .form-group label {
-            font-weight: bold;
-            color: #333;
-        }
-        .btn-custom {
-            background-color: #0069d9;
-            color: #fff;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
-        .alert {
-            margin-top: 20px;
-            border-radius: 5px;
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            padding: 15px;
-        }
-        .alert ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Log in</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../AdminLte/plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="../../AdminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../AdminLte/dist/css/adminlte.min.css">
 </head>
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <h2 class="text-center mb-4">Hoş Geldiniz</h2>
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <form action="{{ route('login') }}" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email Adresi</label>
-                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Emailinizi girin">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Şifre</label>
-                            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Şifrenizi girin">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary btn-custom">Giriş Yap</button>
-                            </div>
-                            <div class="col-6 text-right">
-                                <a href="{{ route('home') }}" class="btn btn-secondary">Anasayfa</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <p href=""><b>Log</b>in</p>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
+     @endif
+      <form action="{{ route('login') }}" method="post">
+        @csrf
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-custom">Giriş Yap</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
     </div>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const alertBox = document.querySelector('.alert');
-            if (alertBox) {
-                setTimeout(() => {
-                    alertBox.style.transition = 'opacity 0.5s ease';
-                    alertBox.style.opacity = '0';
-                    setTimeout(() => {
-                        alertBox.remove();
-                    }, 500);
-                }, 5000);
-            }
-        });
-    </script>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="../../AdminLte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../AdminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../AdminLte/dist/js/adminlte.min.js"></script>
 </body>
 </html>
